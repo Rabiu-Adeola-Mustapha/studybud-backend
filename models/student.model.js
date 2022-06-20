@@ -9,17 +9,16 @@ const studentSchema = new Schema ({
   lastName : {
     type: String,
   },
-  guardianMail : {
-    type: String,
-  },
-  guardianPhone : {
-    type: String,
-  },
   address : {
     type: String,
   },
-  password: {
-    type : String,
+  level : {
+    type : Schema.Types.ObjectId,
+    ref : "Level",
+  },
+  parent : {
+    type : Schema.Types.ObjectId,
+    ref : "Parent",
   },
   subjects : [{
     type : Schema.Types.ObjectId,

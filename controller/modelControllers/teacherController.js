@@ -20,12 +20,12 @@ const getSingleTeacher = async (req, res) => {
         const { teacherId } = req.params;
         const teacher = await Teacher.findById(teacherId);
         if (!teacher)
-          res.status(400).json({ msg: "Teacher records not found" });
+          return res.status(400).json({ msg: "Teacher records not found" });
 
-     res.status(200).json(teacher);
+      res.status(200).json(teacher);
           
     } catch (error) {
-        res.status(400).json(error.msg);
+         res.status(400).json(error.msg);
     }
 };
 
@@ -33,7 +33,7 @@ const RegTeacher = async (req, res) => {
 
     try {
 
-        if(!req.body) res.status(400).json({msg: "Please Complete the techers' registration"});
+        if(!req.body) return res.status(400).json({msg: "Please Complete the techers' registration"});
 
         const {password} = req.body;
         const hashPassword = await bcrypt.hash(password,10);
@@ -62,7 +62,7 @@ const deleteTeacher = async (req, res) => {
         
         const {teacherId} = req.params;
         const teacher = await Teacher.findById(teacherId);
-        if(!teacher) res.status(400).json({msg: "Teacher records not found"});
+        if(!teacher) return res.status(400).json({msg: "Teacher records not found"});
 
         await Teacher.remove(teacher);
 
@@ -78,7 +78,7 @@ const updateTeacher = async (req, res) => {
         
         const { teacherId } = req.params;
         let teacher = await Teacher.findById(teacherId);
-        if (!teacher) res.status(400).json({ msg: "Teacher records not found" });
+        if (!teacher) return res.status(400).json({ msg: "Teacher records not found" });
     
         teacher = await Teacher.findByIdAndUpdate(teacherId, req.body, {new:true});
     
